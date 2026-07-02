@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DersPlanım | Haftalık Ders Programı</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar no-print">
+      <div class="brand">
+        <div class="brand-mark">DP</div>
+        <div>
+          <h1>DersPlanım</h1>
+          <p>Akıllı Haftalık Plan</p>
+        </div>
+      </div>
+
+      <section class="panel">
+        <h2>Plan Bilgileri</h2>
+        <label>Okul Adı
+          <input id="schoolName" type="text" value="Örnek İlkokulu" />
+        </label>
+        <label>Öğretmen Adı
+          <input id="teacherName" type="text" value="Davut Vezir" />
+        </label>
+        <div class="grid-2">
+          <label>Sınıf
+            <select id="classLevel">
+              <option value="2" selected>2. Sınıf</option>
+              <option value="1" disabled>1. Sınıf - yakında</option>
+              <option value="3" disabled>3. Sınıf - yakında</option>
+              <option value="4" disabled>4. Sınıf - yakında</option>
+            </select>
+          </label>
+          <label>Şube
+            <input id="branch" type="text" value="C" maxlength="2" />
+          </label>
+        </div>
+        <div class="grid-2">
+          <label>Hafta
+            <input id="weekNo" type="number" min="1" max="40" value="40" />
+          </label>
+          <label>Tarih Aralığı
+            <select id="dateRange"></select>
+          </label>
+        </div>
+        <label>Haftanın Kitabı
+          <input id="bookName" type="text" value="" placeholder="Kitap adı" />
+        </label>
+        <button class="primary" id="createPlan">Planı Oluştur</button>
+        <button class="secondary" id="saveDraft">Taslağı Kaydet</button>
+        <button class="secondary" id="printPdf">PDF / Yazdır</button>
+      </section>
+
+    </aside>
+
+    <main class="workspace">
+      <div class="topbar no-print">
+        <div>
+          <strong>Önizleme</strong>
+          <span>Kazanım seçimi yapıldığında plan otomatik güncellenir. Hücrelere tıklayıp son düzenleme yapılabilir.</span>
+        </div>
+        <div class="top-actions">
+          <button class="secondary compact" id="exportJson">Veriyi Dışa Aktar</button>
+          <button class="secondary compact" id="printPdfTop">PDF / Yazdır</button>
+        </div>
+      </div>
+
+      <section class="summary-cards no-print">
+        <article><strong>5</strong><span>günlük program</span></article>
+        <article><strong id="lessonCount">0</strong><span>dolu ders hücresi</span></article>
+        <article><strong id="outcomeCount">0</strong><span>seçili kazanım</span></article>
+      </section>
+
+      <section class="outcome-workbench no-print">
+        <div class="outcome-head">
+          <div>
+            <h2>Kazanım Seçimi</h2>
+            <p>Dersi seçin, kazanımları işaretleyin. Seçimler canlı olarak haftalık programa aktarılır.</p>
+          </div>
+          <button class="secondary compact" id="clearOutcomes">Seçimleri Temizle</button>
+        </div>
+        <div class="outcome-layout">
+          <aside class="lesson-tabs" id="lessonTabs"></aside>
+          <div class="outcome-panel">
+            <div class="outcome-toolbar">
+              <label>Ders
+                <select id="subjectSelect"></select>
+              </label>
+              <label>Kazanım Ara
+                <input id="outcomeSearch" type="search" placeholder="Kod, konu veya kazanım metni ara" />
+              </label>
+            </div>
+            <div id="outcomeList" class="outcome-list"></div>
+          </div>
+          <aside class="selected-panel">
+            <h3>Seçilen Kazanımlar</h3>
+            <div id="selectedList" class="selected-list empty">Henüz kazanım seçilmedi.</div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="printArea" class="paper">
+        <header class="document-header">
+          <div>
+            <p id="schoolDisplay" class="school">Örnek İlkokulu</p>
+            <h2 id="titleDisplay">2/C SINIFI 40. HAFTA DERS PROGRAMI</h2>
+          </div>
+          <div class="meta-box">
+            <span id="dateDisplay">Tarih aralığı girilmedi</span>
+          </div>
+        </header>
+
+        <table class="schedule-table" id="scheduleTable"></table>
+
+        <div class="signature">
+          <span>Öğretmen</span>
+          <strong id="teacherDisplay">Davut Vezir</strong>
+        </div>
+
+        <section class="homework">
+          <h3>Ödev Programı</h3>
+          <table id="homeworkTable"></table>
+        </section>
+
+        <section class="book-card">
+          <span>Haftanın Kitabı</span>
+          <strong id="bookDisplay"></strong>
+        </section>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
