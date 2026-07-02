@@ -16,7 +16,7 @@
         <p>Akıllı Öğretmen Platformu</p>
       </div>
     </div>
-    <button class="header-action" data-page="planner">Ders Planı Oluştur</button>
+    <button class="header-action" id="headerMenuButton">Menüyü Aç</button>
   </header>
 
   <div class="drawer-backdrop no-print" id="drawerBackdrop"></div>
@@ -31,12 +31,17 @@
       </div>
       <button class="drawer-close" id="closeMenu" aria-label="Menüyü kapat">×</button>
     </div>
-    <nav class="drawer-nav">
-      <button data-page="home" class="active">Ana Sayfa</button>
-      <button data-page="planner">Haftalık Ders Planı</button>
-      <button data-page="outcomes">Kazanım Seçimi</button>
-      <button data-page="preview">PDF Önizleme</button>
-      <button data-page="help">Yardım</button>
+    <nav class="drawer-nav platform-nav">
+      <button data-page="home" class="active"><span>Ana Sayfa</span></button>
+      <button data-page="planner"><span>Haftalık Ders Planı</span></button>
+      <button data-page="module" data-module="daily"><span>Günlük Plan</span><em>Yakında</em></button>
+      <button data-page="module" data-module="outcomePool"><span>Kazanımlar</span><em>Yakında</em></button>
+      <button data-page="module" data-module="activities"><span>Etkinlik Havuzu</span><em>Yakında</em></button>
+      <button data-page="module" data-module="homework"><span>Ödev Oluşturucu</span><em>Yakında</em></button>
+      <button data-page="module" data-module="specialDays"><span>Belirli Gün ve Haftalar</span><em>Yakında</em></button>
+      <button data-page="module" data-module="documents"><span>Dokümanlar</span><em>Yakında</em></button>
+      <button data-page="module" data-module="ai"><span>Yapay Zekâ Asistanı</span><em>Yakında</em></button>
+      <button data-page="help"><span>Yardım / Hakkında</span></button>
     </nav>
   </aside>
 
@@ -44,12 +49,12 @@
     <section id="homePage" class="home-page page-section">
       <div class="hero-card">
         <div class="hero-copy">
-          <span class="eyebrow">Üyeliksiz • Kayıtsız • Hızlı</span>
-          <h2>Öğretmenler için pratik dijital çalışma alanı</h2>
-          <p>TeachRota ile haftalık ders planınızı oluşturabilir, kazanımları seçebilir ve çıktınızı PDF olarak alabilirsiniz. İlk sürümde hiçbir veri saklanmaz; siteyi kullanır, PDF’inizi alır ve çıkarsınız.</p>
+          <span class="eyebrow">Öğretmenin Dijital Çalışma Alanı</span>
+          <h2>Planla, üret, hazırla ve çıktını al</h2>
+          <p>TeachRota; öğretmenlerin haftalık plan, günlük plan, kazanım, etkinlik, ödev, doküman ve yapay zekâ destekli içerik ihtiyaçlarını tek yerde toplamayı hedefleyen bir platformdur.</p>
           <div class="hero-actions">
-            <button class="primary hero-primary" data-page="planner">Ders Planı Oluştur</button>
-            <button class="secondary hero-secondary" id="homeMenuButton">Menüyü Aç</button>
+            <button class="primary hero-primary" id="homeMenuButton">Menüyü Aç</button>
+            <button class="secondary hero-secondary" data-page="planner">Haftalık Ders Planı</button>
           </div>
         </div>
         <div class="hero-preview">
@@ -65,18 +70,30 @@
         </div>
       </div>
 
-      <div class="feature-grid">
-        <article>
-          <strong>Haftalık Plan</strong>
-          <p>Ders programı görünümünde haftalık plan oluşturma.</p>
+      <div class="feature-grid platform-feature-grid">
+        <article data-page="planner">
+          <strong>Haftalık Ders Planı</strong>
+          <p>İlk aktif modül: kazanım seç, planı oluştur, PDF al.</p>
         </article>
-        <article>
-          <strong>Kazanım Seçimi</strong>
-          <p>Derse göre kazanım seçip plana otomatik işleme.</p>
+        <article data-page="module" data-module="daily">
+          <strong>Günlük Plan</strong>
+          <p>Tek güne özel akış, etkinlik ve materyal planlama.</p>
         </article>
-        <article>
-          <strong>PDF Çıktı</strong>
-          <p>Planı yazdırmaya hazır biçimde PDF olarak alma.</p>
+        <article data-page="module" data-module="activities">
+          <strong>Etkinlik Havuzu</strong>
+          <p>Ders, sınıf ve kazanıma göre uygulanabilir etkinlikler.</p>
+        </article>
+        <article data-page="module" data-module="documents">
+          <strong>Dokümanlar</strong>
+          <p>Zümre, toplantı, kulüp ve rehberlik dokümanları.</p>
+        </article>
+        <article data-page="module" data-module="specialDays">
+          <strong>Belirli Gün ve Haftalar</strong>
+          <p>Pano, konuşma, şiir ve sınıf içi etkinlik önerileri.</p>
+        </article>
+        <article data-page="module" data-module="ai">
+          <strong>Yapay Zekâ Asistanı</strong>
+          <p>İçerik, etkinlik ve ölçme-değerlendirme üretimi.</p>
         </article>
       </div>
     </section>
@@ -204,6 +221,18 @@
           </section>
         </main>
       </div>
+    </section>
+
+
+    <section id="modulePage" class="home-page page-section hidden">
+      <div class="hero-card simple-card module-hero">
+        <div class="hero-copy">
+          <span class="eyebrow" id="moduleBadge">Yakında</span>
+          <h2 id="moduleTitle">Modül</h2>
+          <p id="moduleDescription">Bu bölüm TeachRota'nın sonraki sürümlerinde aktif edilecek.</p>
+        </div>
+      </div>
+      <div class="module-detail-grid" id="moduleDetails"></div>
     </section>
 
     <section id="helpPage" class="home-page page-section hidden">

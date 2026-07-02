@@ -282,26 +282,82 @@ function closeDrawer() {
   if (backdrop) backdrop.classList.remove('open');
 }
 
-function showPage(page) {
+
+const platformModules = {
+  daily: {
+    title: 'Günlük Plan',
+    description: 'Tek güne özel ders akışı, etkinlik, materyal ve değerlendirme hazırlama bölümü.',
+    details: ['Ders akışı oluşturma', 'Etkinlik ve materyal alanı', 'Ölçme-değerlendirme notları']
+  },
+  outcomePool: {
+    title: 'Kazanımlar',
+    description: 'Sınıf ve ders bazlı kazanım arama, filtreleme ve inceleme bölümü.',
+    details: ['Sınıf/ders filtresi', 'Kazanım arama', 'Kazanım kodu ve açıklama görünümü']
+  },
+  activities: {
+    title: 'Etkinlik Havuzu',
+    description: 'Derslere ve kazanımlara göre sınıf içinde uygulanabilecek etkinlik fikirleri.',
+    details: ['Derse göre etkinlikler', 'Sınıf düzeyi filtresi', 'Uygulama süresi ve materyal bilgisi']
+  },
+  homework: {
+    title: 'Ödev Oluşturucu',
+    description: 'Kazanımlara uygun kısa, anlaşılır ve yazdırılabilir ödevler hazırlama bölümü.',
+    details: ['Kazanıma göre ödev', 'PDF çıktısı', 'Sınıf düzeyine göre içerik']
+  },
+  specialDays: {
+    title: 'Belirli Gün ve Haftalar',
+    description: 'Özel günler için pano, konuşma, şiir ve sınıf içi etkinlik hazırlıkları.',
+    details: ['29 Ekim, 10 Kasım, 23 Nisan', 'Pano ve konuşma metinleri', 'Etkinlik önerileri']
+  },
+  documents: {
+    title: 'Dokümanlar',
+    description: 'Öğretmenin sık kullandığı okul evraklarını tek yerde hazırlama alanı.',
+    details: ['Zümre tutanakları', 'Veli toplantısı evrakları', 'Kulüp ve rehberlik dokümanları']
+  },
+  ai: {
+    title: 'Yapay Zekâ Asistanı',
+    description: 'Etkinlik, metin, ölçme-değerlendirme ve ders içeriği üretimini destekleyen asistan.',
+    details: ['Etkinlik önerisi', 'Ödev ve soru üretimi', 'Metin sadeleştirme ve uyarlama']
+  }
+};
+
+function renderModulePage(moduleKey) {
+  const module = platformModules[moduleKey] || platformModules.daily;
+  if (el('moduleTitle')) el('moduleTitle').textContent = module.title;
+  if (el('moduleDescription')) el('moduleDescription').textContent = module.description;
+  if (el('moduleDetails')) {
+    el('moduleDetails').innerHTML = module.details.map(item => `
+      <article>
+        <strong>${item}</strong>
+        <p>Bu özellik sonraki sürümlerde aktif edilecek.</p>
+      </article>
+    `).join('');
+  }
+}
+
+function showPage(page, moduleKey = null) {
   const home = el('homePage');
   const planner = el('plannerPage');
   const help = el('helpPage');
-  [home, planner, help].forEach(section => section && section.classList.add('hidden'));
+  const modulePage = el('modulePage');
+  [home, planner, help, modulePage].forEach(section => section && section.classList.add('hidden'));
 
   if (page === 'home') {
     home.classList.remove('hidden');
   } else if (page === 'help') {
     help.classList.remove('hidden');
+  } else if (page === 'module') {
+    renderModulePage(moduleKey);
+    modulePage.classList.remove('hidden');
   } else {
     planner.classList.remove('hidden');
-    setTimeout(() => {
-      if (page === 'outcomes') el('outcomesSection')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      if (page === 'preview') el('printArea')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 80);
   }
 
   document.querySelectorAll('[data-page]').forEach(button => {
-    button.classList.toggle('active', button.dataset.page === page);
+    const isActive = page === 'module'
+      ? button.dataset.page === 'module' && button.dataset.module === moduleKey
+      : button.dataset.page === page;
+    button.classList.toggle('active', isActive);
   });
   closeDrawer();
 }
@@ -310,6 +366,7 @@ if (el('openMenu')) el('openMenu').addEventListener('click', openDrawer);
 if (el('closeMenu')) el('closeMenu').addEventListener('click', closeDrawer);
 if (el('drawerBackdrop')) el('drawerBackdrop').addEventListener('click', closeDrawer);
 if (el('homeMenuButton')) el('homeMenuButton').addEventListener('click', openDrawer);
+if (el('headerMenuButton')) el('headerMenuButton').addEventListener('click', openDrawer);
 document.querySelectorAll('[data-page]').forEach(button => {
-  button.addEventListener('click', () => showPage(button.dataset.page));
+  button.addEventListener('click', () => showPage(button.dataset.page, button.dataset.module));
 });

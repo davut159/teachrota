@@ -314,3 +314,55 @@ button { border: 0; cursor: pointer; border-radius: 12px; padding: 12px 14px; fo
 @media print {
   .site-header, .drawer, .drawer-backdrop, .home-page { display:none !important; }
 }
+
+/* TeachRota platform menüsü */
+.platform-nav button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.platform-nav button span { pointer-events: none; }
+.platform-nav button em {
+  font-style: normal;
+  font-size: 11px;
+  color: #7c3aed;
+  background: #f3e8ff;
+  border: 1px solid #e9d5ff;
+  border-radius: 999px;
+  padding: 3px 7px;
+  pointer-events: none;
+}
+.platform-feature-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.platform-feature-grid article {
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.platform-feature-grid article:hover {
+  transform: translateY(-3px);
+  border-color: #c4b5fd;
+  box-shadow: 0 14px 34px rgba(109, 40, 217, .12);
+}
+.module-hero { margin-bottom: 18px; }
+.module-detail-grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.module-detail-grid article {
+  background: #fff;
+  border: 1px solid #e9d5ff;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 12px 32px rgba(109, 40, 217, .08);
+}
+.module-detail-grid strong { color: #4c1d95; }
+.module-detail-grid p { color: #6b7280; line-height: 1.45; }
+@media (max-width: 900px) {
+  .platform-feature-grid,
+  .module-detail-grid { grid-template-columns: 1fr; }
+}
