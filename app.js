@@ -252,16 +252,64 @@ function exportJson() {
   URL.revokeObjectURL(url);
 }
 
-el('createPlan').addEventListener('click', createPlan);
-el('saveDraft').addEventListener('click', saveDraft);
-el('exportJson').addEventListener('click', exportJson);
-el('printPdf').addEventListener('click', () => { updateHeader(); applyAllSelectedOutcomes(); window.print(); });
-el('printPdfTop').addEventListener('click', () => { updateHeader(); applyAllSelectedOutcomes(); window.print(); });
-el('subjectSelect').addEventListener('change', (event) => { activeSubject = event.target.value; renderOutcomePicker(); });
-el('outcomeSearch').addEventListener('input', renderOutcomePicker);
-el('clearOutcomes').addEventListener('click', clearOutcomes);
+if (el('createPlan')) el('createPlan').addEventListener('click', createPlan);
+if (el('saveDraft')) el('saveDraft').addEventListener('click', saveDraft);
+if (el('exportJson')) el('exportJson').addEventListener('click', exportJson);
+if (el('printPdf')) el('printPdf').addEventListener('click', () => { updateHeader(); applyAllSelectedOutcomes(); window.print(); });
+if (el('printPdfTop')) el('printPdfTop').addEventListener('click', () => { updateHeader(); applyAllSelectedOutcomes(); window.print(); });
+if (el('subjectSelect')) el('subjectSelect').addEventListener('change', (event) => { activeSubject = event.target.value; renderOutcomePicker(); });
+if (el('outcomeSearch')) el('outcomeSearch').addEventListener('input', renderOutcomePicker);
+if (el('clearOutcomes')) el('clearOutcomes').addEventListener('click', clearOutcomes);
 document.querySelectorAll('input, select').forEach(item => item.addEventListener('input', updateHeader));
 
 populateDateRanges();
 loadDraft();
 createPlan();
+
+
+// TeachRota açılır menü ve sayfa geçişleri
+function openDrawer() {
+  const drawer = el('drawer');
+  const backdrop = el('drawerBackdrop');
+  if (drawer) drawer.classList.add('open');
+  if (backdrop) backdrop.classList.add('open');
+}
+
+function closeDrawer() {
+  const drawer = el('drawer');
+  const backdrop = el('drawerBackdrop');
+  if (drawer) drawer.classList.remove('open');
+  if (backdrop) backdrop.classList.remove('open');
+}
+
+function showPage(page) {
+  const home = el('homePage');
+  const planner = el('plannerPage');
+  const help = el('helpPage');
+  [home, planner, help].forEach(section => section && section.classList.add('hidden'));
+
+  if (page === 'home') {
+    home.classList.remove('hidden');
+  } else if (page === 'help') {
+    help.classList.remove('hidden');
+  } else {
+    planner.classList.remove('hidden');
+    setTimeout(() => {
+      if (page === 'outcomes') el('outcomesSection')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (page === 'preview') el('printArea')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+  }
+
+  document.querySelectorAll('[data-page]').forEach(button => {
+    button.classList.toggle('active', button.dataset.page === page);
+  });
+  closeDrawer();
+}
+
+if (el('openMenu')) el('openMenu').addEventListener('click', openDrawer);
+if (el('closeMenu')) el('closeMenu').addEventListener('click', closeDrawer);
+if (el('drawerBackdrop')) el('drawerBackdrop').addEventListener('click', closeDrawer);
+if (el('homeMenuButton')) el('homeMenuButton').addEventListener('click', openDrawer);
+document.querySelectorAll('[data-page]').forEach(button => {
+  button.addEventListener('click', () => showPage(button.dataset.page));
+});
