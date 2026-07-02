@@ -1,297 +1,61 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TeachRota | Akıllı Öğretmen Platformu</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Haftalık Ders Planı | Web Prototip</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="site-header no-print">
-    <button class="menu-button" id="openMenu" aria-label="Menüyü aç">☰</button>
-    <div class="site-brand">
-      <div class="brand-mark">TR</div>
-      <div>
-        <h1>TeachRota</h1>
-        <p>Akıllı Öğretmen Platformu</p>
-      </div>
-    </div>
-    <button class="header-action" id="headerMenuButton">Menüyü Aç</button>
-  </header>
-
-  <div class="drawer-backdrop no-print" id="drawerBackdrop"></div>
-  <aside class="drawer no-print" id="drawer">
-    <div class="drawer-head">
-      <div class="site-brand">
-        <div class="brand-mark">TR</div>
-        <div>
-          <h2>TeachRota</h2>
-          <p>Menü</p>
-        </div>
-      </div>
-      <button class="drawer-close" id="closeMenu" aria-label="Menüyü kapat">×</button>
-    </div>
-    <nav class="drawer-nav platform-nav">
-      <button data-page="home" class="active"><span>Ana Sayfa</span></button>
-      <button data-page="planner"><span>Haftalık Ders Planı</span></button>
-      <button data-page="module" data-module="daily"><span>Günlük Plan</span><em>Yakında</em></button>
-      <button data-page="module" data-module="outcomePool"><span>Kazanımlar</span><em>Yakında</em></button>
-      <button data-page="module" data-module="activities"><span>Etkinlik Havuzu</span><em>Yakında</em></button>
-      <button data-page="module" data-module="homework"><span>Ödev Oluşturucu</span><em>Yakında</em></button>
-      <button data-page="module" data-module="specialDays"><span>Belirli Gün ve Haftalar</span><em>Yakında</em></button>
-      <button data-page="module" data-module="documents"><span>Dokümanlar</span><em>Yakında</em></button>
-      <button data-page="module" data-module="ai"><span>Yapay Zekâ Asistanı</span><em>Yakında</em></button>
-      <button data-page="help"><span>Yardım / Hakkında</span></button>
+  <aside class="sidebar">
+    <div class="brand"><span>Ş</span><div><b>Plan Yönetimi</b><small>Excel’den web prototip</small></div></div>
+    <nav>
+      <button class="nav active" data-view="dashboard">Genel Bakış</button>
+      <button class="nav" data-view="schedule">Haftalık Plan</button>
+      <button class="nav" data-view="teachers">Öğretmenler</button>
+      <button class="nav" data-view="homework">Ödevler</button>
+      <button class="nav" data-view="roles">Rol Sistemi</button>
     </nav>
+    <div class="rolebox">
+      <small>Aktif rol</small>
+      <select id="roleSelect">
+        <option>Yönetici</option><option>Öğretmen</option><option>Öğrenci</option><option>Veli</option>
+      </select>
+    </div>
   </aside>
-
   <main>
-    <section id="homePage" class="home-page page-section">
-      <div class="hero-card new-hero">
-        <div class="hero-copy">
-          <span class="eyebrow">Öğretmenin Dijital Çalışma Alanı</span>
-          <h2>Planla, üret, hazırla ve çıktını al.</h2>
-          <p>TeachRota; haftalık plan, günlük plan, kazanım, etkinlik, ödev, doküman ve yapay zekâ destekli öğretmen araçlarını tek yerde toplamayı hedefleyen sade bir çalışma platformudur.</p>
-          <div class="hero-actions">
-            <button class="primary hero-primary" data-page="planner">Haftalık Ders Planı Oluştur</button>
-            <button class="secondary hero-secondary" id="homeMenuButton">Modülleri İncele</button>
-          </div>
-          <div class="trust-note">Üyeliksiz kullanım • Veri kaydı yok • PDF çıktısı</div>
-        </div>
-        <div class="hero-preview platform-preview">
-          <div class="preview-window">
-            <div class="preview-bar"><span></span><span></span><span></span></div>
-            <div class="preview-title">TeachRota Modülleri</div>
-            <div class="preview-stack">
-              <div><b>Haftalık Plan</b><em>Aktif</em></div>
-              <div><b>Kazanımlar</b><em>Yakında</em></div>
-              <div><b>Etkinlik Havuzu</b><em>Yakında</em></div>
-              <div><b>Yapay Zekâ</b><em>Yakında</em></div>
-            </div>
-          </div>
-        </div>
+    <header class="topbar">
+      <div><h1>39. Hafta Ders Planı</h1><p>1-7 Haziran haftası Excel dosyasından aktarılan örnek çalışma.</p></div>
+      <div class="actions"><select id="classSelect"></select><button onclick="window.print()">PDF / Yazdır</button></div>
+    </header>
+
+    <section id="dashboard" class="view active">
+      <div class="cards">
+        <div class="card"><small>Sınıf</small><strong id="statClass">-</strong><span>3. sınıf şubeleri</span></div>
+        <div class="card"><small>Haftalık Ders</small><strong id="statLessons">-</strong><span>Seçili sınıf</span></div>
+        <div class="card"><small>Öğretmen Eşleşmesi</small><strong id="statTeachers">-</strong><span>Excel veri tabanı</span></div>
+        <div class="card"><small>Konu Başlığı</small><strong id="statTopics">-</strong><span>KONU sayfasından</span></div>
       </div>
-
-      <section class="home-block">
-        <div class="section-title">
-          <span>Modüller</span>
-          <h3>Öğretmenin haftalık işlerini tek alanda toplayan yapı</h3>
-        </div>
-        <div class="feature-grid platform-feature-grid">
-          <article data-page="planner">
-            <div class="feature-icon">📅</div>
-            <strong>Haftalık Ders Planı</strong>
-            <p>Kazanım seç, haftalık planı oluştur ve PDF çıktısı al.</p>
-          </article>
-          <article data-page="module" data-module="daily">
-            <div class="feature-icon">📖</div>
-            <strong>Günlük Plan</strong>
-            <p>Tek güne özel ders akışı, etkinlik ve materyal planlama.</p>
-          </article>
-          <article data-page="module" data-module="outcomePool">
-            <div class="feature-icon">🎯</div>
-            <strong>Kazanımlar</strong>
-            <p>Sınıf ve ders bazlı kazanım arama ve inceleme alanı.</p>
-          </article>
-          <article data-page="module" data-module="activities">
-            <div class="feature-icon">🧩</div>
-            <strong>Etkinlik Havuzu</strong>
-            <p>Derslere uygun uygulanabilir sınıf içi etkinlik fikirleri.</p>
-          </article>
-          <article data-page="module" data-module="homework">
-            <div class="feature-icon">📝</div>
-            <strong>Ödev Oluşturucu</strong>
-            <p>Kazanıma ve sınıf düzeyine göre ödev taslakları.</p>
-          </article>
-          <article data-page="module" data-module="ai">
-            <div class="feature-icon">🤖</div>
-            <strong>Yapay Zekâ Asistanı</strong>
-            <p>Etkinlik, metin, soru ve ölçme önerileri için destek.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="home-block how-block">
-        <div class="section-title">
-          <span>Nasıl çalışır?</span>
-          <h3>Basit kullanım, hızlı çıktı</h3>
-        </div>
-        <div class="steps-grid">
-          <article><b>1</b><strong>Modül seç</strong><p>Menüden ihtiyacın olan aracı aç.</p></article>
-          <article><b>2</b><strong>İçeriği hazırla</strong><p>Bilgileri gir, kazanım veya içerik seç.</p></article>
-          <article><b>3</b><strong>PDF / çıktı al</strong><p>Hazırladığın çalışmayı indir veya yazdır.</p></article>
-        </div>
-      </section>
-
-      <section class="home-block split-info">
-        <div>
-          <span class="eyebrow small">İlk sürüm mantığı</span>
-          <h3>Üyelik yok, kayıt yok, doğrudan kullanım.</h3>
-          <p>TeachRota’nın ilk sürümünde öğretmen siteye girer, ihtiyacı olan içeriği hazırlar ve çıktısını alır. Bilgiler sistemde saklanmaz.</p>
-        </div>
-        <div class="roadmap-card">
-          <strong>Yakında eklenecekler</strong>
-          <ul>
-            <li>Günlük plan hazırlama</li>
-            <li>Etkinlik önerileri</li>
-            <li>Belirli gün ve haftalar</li>
-            <li>Doküman oluşturucu</li>
-            <li>Yapay zekâ destekli içerik</li>
-          </ul>
-        </div>
-      </section>
+      <div class="panel hero">
+        <div><h2>Web’e taşınınca ortaya çıkacak yapı</h2><p>Excel’deki sınıf programı, öğretmen eşleşmesi, konu ve ödev alanları tek panelde yönetilebilir hale gelir. Bu prototipte veriler şimdilik dosyadan alınmış sabit örnek veridir; sonraki aşamada veritabanına bağlanabilir.</p></div>
+        <div class="mini-flow"><span>Öğretmen</span><b>→</b><span>Ders Programı</span><b>→</b><span>Konu/Kazanım</span><b>→</b><span>PDF</span></div>
+      </div>
+      <div class="panel"><h2>Bugünün plan görünümü</h2><div id="todayPreview" class="lesson-grid"></div></div>
     </section>
 
-    <section id="plannerPage" class="page-section app-page hidden">
-      <div class="app-shell">
-        <aside class="sidebar no-print">
-          <div class="brand">
-            <div class="brand-mark">TR</div>
-            <div>
-              <h1>TeachRota</h1>
-              <p>Haftalık Ders Planı</p>
-            </div>
-          </div>
-
-          <section class="panel">
-            <h2>Plan Bilgileri</h2>
-            <label>Okul Adı
-              <input id="schoolName" type="text" value="Örnek İlkokulu" />
-            </label>
-            <label>Öğretmen Adı
-              <input id="teacherName" type="text" value="Davut Vezir" />
-            </label>
-            <div class="grid-2">
-              <label>Sınıf
-                <select id="classLevel">
-                  <option value="2" selected>2. Sınıf</option>
-                  <option value="1" disabled>1. Sınıf - yakında</option>
-                  <option value="3" disabled>3. Sınıf - yakında</option>
-                  <option value="4" disabled>4. Sınıf - yakında</option>
-                </select>
-              </label>
-              <label>Şube
-                <input id="branch" type="text" value="C" maxlength="2" />
-              </label>
-            </div>
-            <div class="grid-2">
-              <label>Hafta
-                <input id="weekNo" type="number" min="1" max="40" value="40" />
-              </label>
-              <label>Tarih Aralığı
-                <select id="dateRange"></select>
-              </label>
-            </div>
-            <label>Haftanın Kitabı
-              <input id="bookName" type="text" value="" placeholder="Kitap adı" />
-            </label>
-            <button class="primary" id="createPlan">Planı Oluştur</button>
-            <button class="secondary" id="printPdf">PDF / Yazdır</button>
-          </section>
-        </aside>
-
-        <main class="workspace">
-          <div class="topbar no-print">
-            <div>
-              <strong>Önizleme</strong>
-              <span>Kazanım seçimi yapıldığında plan otomatik güncellenir. Hücrelere tıklayıp son düzenleme yapılabilir.</span>
-            </div>
-            <div class="top-actions">
-              <button class="secondary compact" id="printPdfTop">PDF / Yazdır</button>
-            </div>
-          </div>
-
-          <section class="summary-cards no-print">
-            <article><strong>5</strong><span>günlük program</span></article>
-            <article><strong id="lessonCount">0</strong><span>dolu ders hücresi</span></article>
-            <article><strong id="outcomeCount">0</strong><span>seçili kazanım</span></article>
-          </section>
-
-          <section class="outcome-workbench no-print" id="outcomesSection">
-            <div class="outcome-head">
-              <div>
-                <h2>Kazanım Seçimi</h2>
-                <p>Dersi seçin, kazanımları işaretleyin. Seçimler canlı olarak haftalık programa aktarılır.</p>
-              </div>
-              <button class="secondary compact" id="clearOutcomes">Seçimleri Temizle</button>
-            </div>
-            <div class="outcome-layout">
-              <aside class="lesson-tabs" id="lessonTabs"></aside>
-              <div class="outcome-panel">
-                <div class="outcome-toolbar">
-                  <label>Ders
-                    <select id="subjectSelect"></select>
-                  </label>
-                  <label>Kazanım Ara
-                    <input id="outcomeSearch" type="search" placeholder="Kod, konu veya kazanım metni ara" />
-                  </label>
-                </div>
-                <div id="outcomeList" class="outcome-list"></div>
-              </div>
-              <aside class="selected-panel">
-                <h3>Seçilen Kazanımlar</h3>
-                <div id="selectedList" class="selected-list empty">Henüz kazanım seçilmedi.</div>
-              </aside>
-            </div>
-          </section>
-
-          <section id="printArea" class="paper">
-            <header class="document-header">
-              <div>
-                <p id="schoolDisplay" class="school">Örnek İlkokulu</p>
-                <h2 id="titleDisplay">2/C SINIFI 40. HAFTA DERS PROGRAMI</h2>
-              </div>
-              <div class="meta-box">
-                <span id="dateDisplay">Tarih aralığı girilmedi</span>
-              </div>
-            </header>
-
-            <table class="schedule-table" id="scheduleTable"></table>
-
-            <div class="signature">
-              <span>Öğretmen</span>
-              <strong id="teacherDisplay">Davut Vezir</strong>
-            </div>
-
-            <section class="homework">
-              <h3>Ödev Programı</h3>
-              <table id="homeworkTable"></table>
-            </section>
-
-            <section class="book-card">
-              <span>Haftanın Kitabı</span>
-              <strong id="bookDisplay"></strong>
-            </section>
-          </section>
-        </main>
-      </div>
+    <section id="schedule" class="view">
+      <div class="panel"><div class="panel-head"><h2 id="scheduleTitle">Haftalık Plan</h2><input id="searchInput" placeholder="Ders, konu veya öğretmen ara..." /></div><div id="weekGrid" class="week-grid"></div></div>
     </section>
 
-
-    <section id="modulePage" class="home-page page-section hidden">
-      <div class="hero-card simple-card module-hero">
-        <div class="hero-copy">
-          <span class="eyebrow" id="moduleBadge">Yakında</span>
-          <h2 id="moduleTitle">Modül</h2>
-          <p id="moduleDescription">Bu bölüm TeachRota'nın sonraki sürümlerinde aktif edilecek.</p>
-        </div>
-      </div>
-      <div class="module-detail-grid" id="moduleDetails"></div>
-    </section>
-
-    <section id="helpPage" class="home-page page-section hidden">
-      <div class="hero-card simple-card">
-        <div class="hero-copy">
-          <span class="eyebrow">Yardım</span>
-          <h2>TeachRota nasıl kullanılır?</h2>
-          <p>Menüden “Haftalık Ders Planı” bölümüne girin. Plan bilgilerini doldurun, kazanımları seçin ve PDF/Yazdır butonuyla çıktınızı alın.</p>
-          <button class="primary hero-primary" data-page="planner">Ders Planına Git</button>
-        </div>
-      </div>
-    </section>
+    <section id="teachers" class="view"><div class="panel"><h2>Öğretmen - Ders Eşleşmeleri</h2><div id="teacherTable" class="table"></div></div></section>
+    <section id="homework" class="view"><div class="panel"><h2>Haftalık Ödev Planı</h2><div id="homeworkGrid" class="homework-grid"></div></div></section>
+    <section id="roles" class="view"><div class="roles-grid">
+      <div class="role-card"><h3>Yönetici</h3><p>Sınıf, öğretmen, ders, kazanım ve haftalık planları yönetir. PDF/rapor alır.</p></div>
+      <div class="role-card"><h3>Öğretmen</h3><p>Kendi sınıf ve derslerine ait konu/kazanım girişlerini yapar, ödev ekler.</p></div>
+      <div class="role-card"><h3>Öğrenci</h3><p>Haftalık ders akışını, ödevlerini ve materyalleri görüntüler.</p></div>
+      <div class="role-card"><h3>Veli</h3><p>Ödev, günlük ders özeti ve öğretmen notlarını sade ekrandan takip eder.</p></div>
+    </div></section>
   </main>
-
-  <script src="data.js"></script>
-  <script src="app.js"></script>
+  <script src="data.js"></script><script src="app.js"></script>
 </body>
 </html>
