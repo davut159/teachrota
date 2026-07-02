@@ -47,55 +47,99 @@
 
   <main>
     <section id="homePage" class="home-page page-section">
-      <div class="hero-card">
+      <div class="hero-card new-hero">
         <div class="hero-copy">
           <span class="eyebrow">Öğretmenin Dijital Çalışma Alanı</span>
-          <h2>Planla, üret, hazırla ve çıktını al</h2>
-          <p>TeachRota; öğretmenlerin haftalık plan, günlük plan, kazanım, etkinlik, ödev, doküman ve yapay zekâ destekli içerik ihtiyaçlarını tek yerde toplamayı hedefleyen bir platformdur.</p>
+          <h2>Planla, üret, hazırla ve çıktını al.</h2>
+          <p>TeachRota; haftalık plan, günlük plan, kazanım, etkinlik, ödev, doküman ve yapay zekâ destekli öğretmen araçlarını tek yerde toplamayı hedefleyen sade bir çalışma platformudur.</p>
           <div class="hero-actions">
-            <button class="primary hero-primary" id="homeMenuButton">Menüyü Aç</button>
-            <button class="secondary hero-secondary" data-page="planner">Haftalık Ders Planı</button>
+            <button class="primary hero-primary" data-page="planner">Haftalık Ders Planı Oluştur</button>
+            <button class="secondary hero-secondary" id="homeMenuButton">Modülleri İncele</button>
           </div>
+          <div class="trust-note">Üyeliksiz kullanım • Veri kaydı yok • PDF çıktısı</div>
         </div>
-        <div class="hero-preview">
+        <div class="hero-preview platform-preview">
           <div class="preview-window">
             <div class="preview-bar"><span></span><span></span><span></span></div>
-            <div class="preview-line wide"></div>
-            <div class="preview-grid">
-              <div></div><div></div><div></div>
-              <div></div><div></div><div></div>
-              <div></div><div></div><div></div>
+            <div class="preview-title">TeachRota Modülleri</div>
+            <div class="preview-stack">
+              <div><b>Haftalık Plan</b><em>Aktif</em></div>
+              <div><b>Kazanımlar</b><em>Yakında</em></div>
+              <div><b>Etkinlik Havuzu</b><em>Yakında</em></div>
+              <div><b>Yapay Zekâ</b><em>Yakında</em></div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="feature-grid platform-feature-grid">
-        <article data-page="planner">
-          <strong>Haftalık Ders Planı</strong>
-          <p>İlk aktif modül: kazanım seç, planı oluştur, PDF al.</p>
-        </article>
-        <article data-page="module" data-module="daily">
-          <strong>Günlük Plan</strong>
-          <p>Tek güne özel akış, etkinlik ve materyal planlama.</p>
-        </article>
-        <article data-page="module" data-module="activities">
-          <strong>Etkinlik Havuzu</strong>
-          <p>Ders, sınıf ve kazanıma göre uygulanabilir etkinlikler.</p>
-        </article>
-        <article data-page="module" data-module="documents">
-          <strong>Dokümanlar</strong>
-          <p>Zümre, toplantı, kulüp ve rehberlik dokümanları.</p>
-        </article>
-        <article data-page="module" data-module="specialDays">
-          <strong>Belirli Gün ve Haftalar</strong>
-          <p>Pano, konuşma, şiir ve sınıf içi etkinlik önerileri.</p>
-        </article>
-        <article data-page="module" data-module="ai">
-          <strong>Yapay Zekâ Asistanı</strong>
-          <p>İçerik, etkinlik ve ölçme-değerlendirme üretimi.</p>
-        </article>
-      </div>
+      <section class="home-block">
+        <div class="section-title">
+          <span>Modüller</span>
+          <h3>Öğretmenin haftalık işlerini tek alanda toplayan yapı</h3>
+        </div>
+        <div class="feature-grid platform-feature-grid">
+          <article data-page="planner">
+            <div class="feature-icon">📅</div>
+            <strong>Haftalık Ders Planı</strong>
+            <p>Kazanım seç, haftalık planı oluştur ve PDF çıktısı al.</p>
+          </article>
+          <article data-page="module" data-module="daily">
+            <div class="feature-icon">📖</div>
+            <strong>Günlük Plan</strong>
+            <p>Tek güne özel ders akışı, etkinlik ve materyal planlama.</p>
+          </article>
+          <article data-page="module" data-module="outcomePool">
+            <div class="feature-icon">🎯</div>
+            <strong>Kazanımlar</strong>
+            <p>Sınıf ve ders bazlı kazanım arama ve inceleme alanı.</p>
+          </article>
+          <article data-page="module" data-module="activities">
+            <div class="feature-icon">🧩</div>
+            <strong>Etkinlik Havuzu</strong>
+            <p>Derslere uygun uygulanabilir sınıf içi etkinlik fikirleri.</p>
+          </article>
+          <article data-page="module" data-module="homework">
+            <div class="feature-icon">📝</div>
+            <strong>Ödev Oluşturucu</strong>
+            <p>Kazanıma ve sınıf düzeyine göre ödev taslakları.</p>
+          </article>
+          <article data-page="module" data-module="ai">
+            <div class="feature-icon">🤖</div>
+            <strong>Yapay Zekâ Asistanı</strong>
+            <p>Etkinlik, metin, soru ve ölçme önerileri için destek.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="home-block how-block">
+        <div class="section-title">
+          <span>Nasıl çalışır?</span>
+          <h3>Basit kullanım, hızlı çıktı</h3>
+        </div>
+        <div class="steps-grid">
+          <article><b>1</b><strong>Modül seç</strong><p>Menüden ihtiyacın olan aracı aç.</p></article>
+          <article><b>2</b><strong>İçeriği hazırla</strong><p>Bilgileri gir, kazanım veya içerik seç.</p></article>
+          <article><b>3</b><strong>PDF / çıktı al</strong><p>Hazırladığın çalışmayı indir veya yazdır.</p></article>
+        </div>
+      </section>
+
+      <section class="home-block split-info">
+        <div>
+          <span class="eyebrow small">İlk sürüm mantığı</span>
+          <h3>Üyelik yok, kayıt yok, doğrudan kullanım.</h3>
+          <p>TeachRota’nın ilk sürümünde öğretmen siteye girer, ihtiyacı olan içeriği hazırlar ve çıktısını alır. Bilgiler sistemde saklanmaz.</p>
+        </div>
+        <div class="roadmap-card">
+          <strong>Yakında eklenecekler</strong>
+          <ul>
+            <li>Günlük plan hazırlama</li>
+            <li>Etkinlik önerileri</li>
+            <li>Belirli gün ve haftalar</li>
+            <li>Doküman oluşturucu</li>
+            <li>Yapay zekâ destekli içerik</li>
+          </ul>
+        </div>
+      </section>
     </section>
 
     <section id="plannerPage" class="page-section app-page hidden">
